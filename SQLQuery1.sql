@@ -323,3 +323,54 @@ RANK() OVER(PARTITION BY Gender ORDER BY salary) AS rank_num
 FROM employees
 JOIN performance_reviews
 ON employees.employee_id = performance_reviews.EmployeeID;
+
+-- Temp tables in ssms-- CREATE TEMPORARY TABLE IN MySQL-- #table_name in SSMS--
+
+SELECT * 
+INTO #temp_table
+FROM
+employees WHERE salary>60000;
+
+SELECT * FROM #temp_table;
+
+--CTE's --
+WITH cte_eg AS
+(
+SELECT * 
+FROM employees)
+SELECT AVG(salary) FROM cte_eg;
+
+
+--STORED PROCEDURES---
+CREATE PROCEDURE GetHighEarners
+AS  -- Tells SQL Server the definition starts here
+BEGIN  -- Opens the code block
+    SELECT employee_id, first_name, salary 
+    FROM employees 
+    WHERE salary > 60000 
+    ORDER BY salary DESC;
+END;  -- Closes the code block
+
+EXEC GetHighEarners;
+
+CREATE TABLE SAMPLE_T(
+SAM_NO INT IDENTITY(1,1) PRIMARY KEY,
+sam_nam VARCHAR(50));
+
+INSERT INTO SAMPLE_T(sam_nam
+) VALUES
+('A'),('B'),('C');
+
+SELECT * FROM SAMPLE_T;
+
+DELETE FROM SAMPLE_T WHERE SAM_NO=3;
+TRUNCATE TABLE SAMPLE_T;
+DROP TABLE SAMPLE_T;
+
+
+--- TRIGGERS AND EVENTS---
+
+
+
+
+
